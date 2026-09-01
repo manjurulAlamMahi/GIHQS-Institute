@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pathological Document</title>
+<style>h2::before{content:"x"}</style>
+<script>
+  // A heading inside a script must never be treated as a section.
+  var template = "<h2>Not A Real Section</h2>";
+</script>
+</head>
+<body>
+  <div class=unquoted-attribute>
+    <p>Malformed markup below: unclosed tags, duplicate ids, nesting.
+    <section id="dup">
+      <h2>First</h2>
+      <section id="dup">
+        <h3>Nested with a duplicate id</h3>
+      </section>
+    </section>
+    <section>
+      <!-- no heading at all, so it cannot be labelled -->
+      <p>Orphan section
+    </section>
+    <img src="x.png">
+    <br>
+  </div>
+  <template><h2>Inside A Template</h2></template>
+</body>
+</html>

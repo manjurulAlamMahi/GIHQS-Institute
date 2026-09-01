@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\VisionMissionValueApiController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CertificationApplicationController;
 use App\Http\Controllers\Api\ContactMessageController;
+use App\Http\Controllers\Api\HtmlResourceController;
 use App\Http\Controllers\Api\PathwayApiController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\StripeController;
@@ -172,6 +173,33 @@ Route::get('/accreditation-fees', [AccreditationFeeApiController::class, 'getAcc
 Route::get('/accreditation-apply-hero', [AccreditationApplyHeroApiController::class, 'getAccreditationApplyHero']);
 Route::get('/advisory-services', [AdvisoryServicesApiController::class, 'getAdvisoryServices']);
 Route::get('/request-advisory-consultation', [RequestAdvisoryConsultationApiController::class, 'getRequestAdvisoryConsultation']);
+
+// Uploaded HTML documents (modules, story guides, toolkits).
+// Served through Laravel rather than as static files so paid material is gated
+// by the same entitlement rule as the rest of the API. Auth is optional here:
+// public documents are open, and the controller enforces the rest.
+// The viewer endpoint an <iframe src> loads. Deliberately unauthenticated: an
+// iframe cannot send an Authorization header, so the single-use ticket carries
+// the authority instead. It was authorised when issued and dies on first use.
+Route::get('/html/view/{ticket}', [HtmlResourceController::class, 'view'])
+    ->where('ticket', '[A-Za-z0-9]+')
+    ->name('html-resource.view');
+
+// Exchange an access key for a licence, and exchange a bearer token for a
+// ticket. Redemption is throttled so a shared key cannot be guessed.
+Route::middleware('throttle:10,1')->post('/html/{resource}/redeem', [HtmlResourceController::class, 'redeem'])
+    ->where('resource', '[0-9]+')
+    ->name('html-resource.redeem');
+
+Route::post('/html/{resource}/ticket', [HtmlResourceController::class, 'ticket'])
+    ->where('resource', '[0-9]+')
+    ->name('html-resource.ticket');
+
+// Direct access, retained for documents marked public. Everything else is
+// refused here and must go through a ticket.
+Route::get('/html/{resource}', [HtmlResourceController::class, 'show'])
+    ->where('resource', '[0-9]+')
+    ->name('html-resource.show');
 
 // Membership Packages
 Route::get('/membership-packages', [MembershipPackageApiController::class, 'index']);

@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\Farhad\AdvisoryRequestController;
 use App\Http\Controllers\Backend\Farhad\AccreditationApplicationController;
 use App\Http\Controllers\Backend\Farhad\DashboardController;
 use App\Http\Controllers\Backend\Farhad\CatalogueController;
+use App\Http\Controllers\Backend\Farhad\CatalogueHtmlResourceController;
 use App\Http\Controllers\Backend\Farhad\CatalogueCertificationController;
 use App\Http\Controllers\Backend\Farhad\CatalogueOtherController;
 use App\Http\Controllers\Backend\Farhad\ExamController;
@@ -76,6 +77,20 @@ Route::middleware(['auth:web', 'role:admin,manager'])->prefix('admin')->name('ad
     Route::get('packages/{package}/edit', [PackageController::class, 'edit'])->name('packages.edit');
     Route::put('packages/{package}', [PackageController::class, 'update'])->name('packages.update');
     Route::delete('packages/{package}', [PackageController::class, 'destroy'])->name('packages.destroy');
+
+    // Catalogue HTML documents (modules, story guides, toolkits, worksheets)
+    Route::get('catalogues/{catalogue}/html-resources', [CatalogueHtmlResourceController::class, 'index'])
+        ->name('catalogue-html-resources.index');
+    Route::post('catalogues/{catalogue}/html-resources', [CatalogueHtmlResourceController::class, 'store'])
+        ->name('catalogue-html-resources.store');
+    Route::put('html-resources/{htmlResource}', [CatalogueHtmlResourceController::class, 'update'])
+        ->name('catalogue-html-resources.update');
+    Route::delete('html-resources/{htmlResource}', [CatalogueHtmlResourceController::class, 'destroy'])
+        ->name('catalogue-html-resources.destroy');
+    Route::post('html-resource-licenses/{htmlResourceLicense}/revoke', [CatalogueHtmlResourceController::class, 'revokeLicense'])
+        ->name('html-resource-licenses.revoke');
+    Route::post('html-resource-licenses/{htmlResourceLicense}/restore', [CatalogueHtmlResourceController::class, 'restoreLicense'])
+        ->name('html-resource-licenses.restore');
 
     // Catalogue routes
     Route::resource('catalogues', CatalogueController::class)->except(['show']);

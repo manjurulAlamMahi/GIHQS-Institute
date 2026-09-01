@@ -80,6 +80,28 @@ export const profileApi = baseApi.injectEndpoints({
     getPurchasedCatalogueById: builder.query<PurchasedCatalogueDetailResponse, string | number>({
       query: (id) => `/profile/purchased-catalogues/${id}`,
     }),
+    /**
+     * Exchange the bearer token for a single-use viewer URL. An iframe cannot
+     * send an Authorization header, so the ticket carries the authority instead.
+     * Tickets expire in about a minute and die on first use, which is also what
+     * stops a copied URL from working.
+     */
+    getHtmlResourceTicket: builder.mutation<
+      { success: boolean; message: string; data: { url: string; expires_in: number }; code: number },
+      string | number
+    >({
+      query: (resourceId) => ({ url: `/html/${resourceId}/ticket`, method: 'POST' }),
+    }),
+    redeemHtmlResourceKey: builder.mutation<
+      { success: boolean; message: string; data: { expires_at: string | null }; code: number },
+      { resourceId: string | number; key: string }
+    >({
+      query: ({ resourceId, key }) => ({
+        url: `/html/${resourceId}/redeem`,
+        method: 'POST',
+        body: { key },
+      }),
+    }),
     getExamQuestions: builder.query<ExamQuestionsResponse, string | number>({ query: (id) => `/profile/exams/${id}` }),
     submitExam: builder.mutation<ExamSubmitResponse, { id: string | number; answers: { question_id: number; option_id: number }[]; duration: number }>({
       query: ({ id, ...body }) => ({ url: `/profile/exams/${id}/submit`, method: 'POST', body }),
@@ -134,6 +156,8 @@ export const {
   useLazyGetOrderInvoiceQuery,
   useGetPurchasedCataloguesQuery,
   useGetPurchasedCatalogueByIdQuery,
+  useGetHtmlResourceTicketMutation,
+  useRedeemHtmlResourceKeyMutation,
   useGetExamQuestionsQuery,
   useSubmitExamMutation,
   useCompleteCatalogueVideoMutation,

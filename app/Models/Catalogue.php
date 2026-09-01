@@ -142,6 +142,17 @@ class Catalogue extends Model
     }
 
     /**
+     * Standalone HTML documents attached to this catalogue - modules, story
+     * guides, toolkits and worksheets.
+     */
+    public function htmlResources()
+    {
+        return $this->hasMany(CatalogueHtmlResource::class, 'catalogue_id')
+            ->orderBy('sort_order')
+            ->orderBy('id');
+    }
+
+    /**
      * Get the discount percentage dynamically based on user status (Non-Stacking Policy)
      */
     public function getDiscountPercentageForUser(?User $user): float

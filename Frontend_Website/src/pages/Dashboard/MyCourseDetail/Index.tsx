@@ -19,6 +19,7 @@ import {
   Download,
   ExternalLink,
   FileText,
+  Lock,
   Play,
   PlayCircle,
 } from "lucide-react"
@@ -267,7 +268,8 @@ export default function DashboardCourseDetail() {
     (catalogue.resources && catalogue.resources.length > 0) ||
     (catalogue.live_links && catalogue.live_links.length > 0) ||
     (catalogue.video_files && catalogue.video_files.length > 0) ||
-    (catalogue.video_links && catalogue.video_links.length > 0)
+    (catalogue.video_links && catalogue.video_links.length > 0) ||
+    (catalogue.html_resources && catalogue.html_resources.length > 0)
 
   return (
     <section className="min-h-full bg-[#f4f6f7] px-5 py-6">
@@ -352,12 +354,57 @@ export default function DashboardCourseDetail() {
               {!catalogue.resources?.length &&
               !catalogue.live_links?.length &&
               !catalogue.video_files?.length &&
-              !catalogue.video_links?.length ? (
+              !catalogue.video_links?.length &&
+              !catalogue.html_resources?.length ? (
                 <div className="py-12 text-center text-[#667085]">
                   No resources available.
                 </div>
               ) : (
                 <>
+                  {/* Interactive HTML documents - modules, toolkits, worksheets */}
+                  {catalogue.html_resources &&
+                    catalogue.html_resources.length > 0 && (
+                      <div>
+                        <h3 className="mb-3 text-[16px] font-semibold text-[#111827]">
+                          Modules & Toolkits
+                        </h3>
+                        <div className="grid gap-4 md:grid-cols-2">
+                          {catalogue.html_resources.map((doc) => (
+                            <Link
+                              key={doc.id}
+                              to={ROUTES.DASHBOARD_HTML_RESOURCE.replace(
+                                ":id",
+                                catalogue.id.toString()
+                              ).replace(":resourceId", doc.id.toString())}
+                              className="flex items-center justify-between rounded-xl border border-border bg-[#f8faf9] p-4 transition-colors hover:border-[#14392f]/30 hover:bg-[#edf5f1]"
+                            >
+                              <div className="flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#14392f]/10 text-[#14392f]">
+                                  <BookOpen className="h-5 w-5" />
+                                </div>
+                                <div>
+                                  <span className="block font-medium text-[#111827]">
+                                    {doc.title}
+                                  </span>
+                                  <span className="text-[13px] text-[#667085] capitalize">
+                                    {doc.kind.replace("_", " ")}
+                                    {doc.requires_license && !doc.has_license && (
+                                      <span className="ml-2 inline-flex items-center gap-1 text-[#ddb737] normal-case">
+                                        <Lock className="h-3 w-3" /> Access key needed
+                                      </span>
+                                    )}
+                                  </span>
+                                </div>
+                              </div>
+                              <span className="text-[14px] font-semibold text-[#14392f]">
+                                {doc.requires_license && !doc.has_license ? "Unlock" : "Open"}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                   {/* Documents & Files */}
                   {catalogue.resources && catalogue.resources.length > 0 && (
                     <div>

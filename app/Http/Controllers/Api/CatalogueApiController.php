@@ -19,8 +19,10 @@ class CatalogueApiController extends Controller
 {
     use ApiResponse, GeneratesCertificates;
 
-    public function __construct(private ExamEligibilityService $eligibility)
-    {
+    public function __construct(
+        private ExamEligibilityService $eligibility,
+        private \App\Services\HtmlResourceAccessService $htmlAccess,
+    ) {
     }
 
     /**
@@ -452,7 +454,7 @@ class CatalogueApiController extends Controller
                           ->where('payment_status', 'paid');
                 });
             }
-            $item = $query->with(['features', 'resources', 'exams', 'liveLinks', 'videos', 'videoLinks'])->first();
+            $item = $query->with(['features', 'resources', 'exams', 'liveLinks', 'videos', 'videoLinks', 'htmlResources'])->first();
 
             // Existence Check
             if (!$item) {
@@ -556,6 +558,27 @@ class CatalogueApiController extends Controller
                         'is_completed'     => $isCompleted,
                     ];
                 }),
+                // Uploaded HTML documents. No document URL is published at all:
+                // the viewer exchanges its token for a single-use ticket, so
+                // there is never a durable link to copy or share. The access key
+                // is hidden on the model and never reaches the client.
+                'html_resources'                 => $item->htmlResources->map(function ($resource) use ($user) {
+                    $license = $resource->requiresLicense()
+                        ? $this->htmlAccess->licenseFor($resource, $user)
+                        : null;
+
+                    return [
+                        'id'               => $resource->id,
+                        'title'            => $resource->title,
+                        'kind'             => $resource->kind,
+                        'is_public'        => (bool) $resource->is_public,
+                        'requires_license' => $resource->requiresLicense(),
+                        'has_license'      => $resource->requiresLicense()
+                            ? (bool) ($license && $license->isValid())
+                            : true,
+                        'license_expires_at' => $license?->expires_at?->toIso8601String(),
+                    ];
+                })->values(),
                 'coursework_completed'           => $this->eligibility->hasCompletedCoursework($user, $item),
                 'exams'                          => $item->exams->map(function ($exam) use ($user, $item) {
                     $status = $this->eligibility->attemptStatus($user, $exam, $item);

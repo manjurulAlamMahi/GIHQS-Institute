@@ -121,12 +121,31 @@ export interface PurchasedCatalogueVideoLink {
   is_completed: boolean
 }
 
+/**
+ * A standalone HTML document attached to a course.
+ *
+ * Note there is no `url`. The viewer exchanges its token for a single-use ticket
+ * at open time, so no durable link to the document ever reaches the client.
+ */
+export interface PurchasedCatalogueHtmlResource {
+  id: number
+  title: string
+  kind: "module" | "story_guide" | "toolkit" | "worksheet" | string
+  is_public: boolean
+  /** True when an admin has set an access key on the document. */
+  requires_license: boolean
+  /** True when this viewer may open it right now. */
+  has_license: boolean
+  license_expires_at?: string | null
+}
+
 export interface PurchasedCatalogueDetail extends PurchasedCatalogue {
   resources: PurchasedCatalogueResource[]
   live_links?: PurchasedCatalogueLiveLink[]
   video_files?: PurchasedCatalogueVideoFile[]
   video_links?: PurchasedCatalogueVideoLink[]
   exams: PurchasedCatalogueExam[]
+  html_resources?: PurchasedCatalogueHtmlResource[]
   overview_video?: string | null
 }
 

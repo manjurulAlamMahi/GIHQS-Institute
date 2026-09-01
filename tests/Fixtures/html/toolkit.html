@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Healthcare RCA Toolkit</title>
+<style>
+  :root{--ink:#17212b;--muted:#667085;--line:#d9e1e7;--bg:#f4f7f9;--card:#fff;--accent:#0b6b69;--soft:#e8f4f3;--warn:#fff7e6}
+  *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+  .app{max-width:1100px;margin:0 auto;padding:24px}.hero{background:linear-gradient(135deg,#0b6b69,#134e5e);color:#fff;padding:28px;border-radius:18px;margin-bottom:20px}
+  .hero h1{margin:0 0 8px;font-size:32px}.hero p{margin:0;opacity:.92;line-height:1.5}.grid{display:grid;grid-template-columns:260px 1fr;gap:18px}
+  .nav,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px}.nav{padding:12px;height:max-content;position:sticky;top:18px}
+  .nav button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:12px;border-radius:10px;cursor:pointer;font-weight:700;color:var(--ink)}
+  .nav button.active,.nav button:hover{background:var(--soft);color:var(--accent)}.panel{padding:24px;min-height:560px}.section{display:none}.section.active{display:block}
+  h2{margin-top:0}label{font-weight:700;display:block;margin:14px 0 6px}textarea,input,select{width:100%;padding:11px;border:1px solid #cfd8df;border-radius:9px;font:inherit;background:#fff}
+  textarea{min-height:95px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tip{background:var(--soft);border-left:4px solid var(--accent);padding:12px 14px;border-radius:8px;margin:12px 0}.warning{background:var(--warn);padding:12px 14px;border-radius:8px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.btn{border:0;border-radius:9px;padding:11px 16px;font-weight:700;cursor:pointer}.primary{background:var(--accent);color:#fff}.secondary{background:#eef2f5;color:#263238}
+  .fish{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.fish input{margin-top:5px}.footer{font-size:12px;color:var(--muted);margin-top:18px;text-align:center}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}.nav{position:static}.row,.fish{grid-template-columns:1fr}}
+  @media print{.nav,.actions,.hero p{display:none}.grid{display:block}.section{display:block!important}.panel{border:0;padding:0}.hero{color:#000;background:#fff;padding:0}.app{padding:0}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hero">
+    <h1>Healthcare Root Cause Analysis Toolkit</h1>
+    <p>A simple offline practice tool for documenting an event, identifying contributing factors, testing root causes, and defining corrective actions.</p>
+  </div>
+  <div class="grid">
+    <aside class="nav" id="nav">
+      <button class="active" data-target="event">1. Event</button>
+      <button data-target="timeline">2. Timeline</button>
+      <button data-target="causes">3. Contributing Factors</button>
+      <button data-target="fivewhys">4. Five Whys</button>
+      <button data-target="actions">5. Action Plan</button>
+      <button data-target="summary">6. Summary</button>
+    </aside>
+    <main class="panel">
+      <section id="event" class="section active">
+        <h2>1. Define the Event</h2>
+        <div class="tip">Describe what happened objectively. Avoid blame, assumptions, or conclusions at this stage.</div>
+        <div class="row"><div><label>Event title</label><input id="eventTitle" placeholder="Example: Delay in medication administration"></div><div><label>Date</label><input id="eventDate" type="date"></div></div>
+        <label>What happened?</label><textarea id="eventDesc" placeholder="Brief factual description..."></textarea>
+        <label>Actual or potential impact</label><textarea id="impact" placeholder="Patient impact, service impact, or near-miss potential..."></textarea>
+      </section>
+      <section id="timeline" class="section">
+        <h2>2. Build a Simple Timeline</h2>
+        <div class="tip">Record the key sequence of events. Focus on what occurred before, during, and after the incident.</div>
+        <label>Before the event</label><textarea id="before"></textarea><label>During the event</label><textarea id="during"></textarea><label>After the event</label><textarea id="after"></textarea>
+      </section>
+      <section id="causes" class="section">
+        <h2>3. Explore Contributing Factors</h2>
+        <div class="warning">A contributing factor is not automatically a root cause. Look for system conditions that allowed the event to occur or made it more likely.</div>
+        <div class="fish">
+          <div><label>People</label><input id="people" placeholder="Staffing, competency, communication"></div>
+          <div><label>Process</label><input id="process" placeholder="Workflow, handoffs, procedures"></div>
+          <div><label>Environment</label><input id="environment" placeholder="Layout, noise, workload"></div>
+          <div><label>Equipment / Technology</label><input id="equipment" placeholder="Devices, alerts, EHR"></div>
+          <div><label>Policies / Rules</label><input id="policies" placeholder="Clarity, availability, alignment"></div>
+          <div><label>Organization</label><input id="organization" placeholder="Leadership, resources, oversight"></div>
+        </div>
+      </section>
+      <section id="fivewhys" class="section">
+        <h2>4. Test a Cause with the Five Whys</h2>
+        <label>Problem / contributing factor to explore</label><input id="problem">
+        <label>Why 1?</label><input id="why1"><label>Why 2?</label><input id="why2"><label>Why 3?</label><input id="why3"><label>Why 4?</label><input id="why4"><label>Why 5?</label><input id="why5">
+        <div class="tip">Stop when the answer identifies a controllable system issue and further questioning no longer adds useful causal information.</div>
+      </section>
+      <section id="actions" class="section">
+        <h2>5. Define Corrective Actions</h2>
+        <label>Root cause statement</label><textarea id="rootCause" placeholder="State the system condition and how it contributed to the event."></textarea>
+        <div class="row"><div><label>Corrective action</label><textarea id="corrective"></textarea></div><div><label>Owner</label><input id="owner"><label>Target date</label><input id="targetDate" type="date"></div></div>
+        <label>How will effectiveness be measured?</label><textarea id="measure" placeholder="Define an observable measure, audit, rate, or outcome."></textarea>
+      </section>
+      <section id="summary" class="section">
+        <h2>6. RCA Summary</h2>
+        <div id="summaryBox" class="tip">Complete the earlier sections, then select “Refresh Summary.”</div>
+        <div class="actions"><button class="btn primary" onclick="buildSummary()">Refresh Summary</button><button class="btn secondary" onclick="window.print()">Print / Save PDF</button><button class="btn secondary" onclick="clearAll()">Clear Test Data</button></div>
+      </section>
+      <div class="actions"><button class="btn primary" onclick="nextSection()">Next</button><button class="btn secondary" onclick="saveLocal()">Save Locally</button></div>
+    </main>
+  </div>
+  <div class="footer">Sample testing toolkit only — not a substitute for organizational RCA policy, clinical judgment, or regulatory requirements.</div>
+</div>
+<script>
+const buttons=[...document.querySelectorAll('#nav button')], sections=[...document.querySelectorAll('.section')];
+buttons.forEach(b=>b.addEventListener('click',()=>show(b.dataset.target)));
+function show(id){buttons.forEach(b=>b.classList.toggle('active',b.dataset.target===id));sections.forEach(s=>s.classList.toggle('active',s.id===id));window.scrollTo({top:0,behavior:'smooth'});}
+function nextSection(){const i=buttons.findIndex(b=>b.classList.contains('active'));show(buttons[Math.min(i+1,buttons.length-1)].dataset.target)}
+function fields(){return [...document.querySelectorAll('input,textarea')];}
+function saveLocal(){const d={};fields().forEach(f=>d[f.id]=f.value);localStorage.setItem('healthcareRcaToolkit',JSON.stringify(d));alert('Saved on this device/browser.');}
+function loadLocal(){try{const d=JSON.parse(localStorage.getItem('healthcareRcaToolkit')||'{}');fields().forEach(f=>{if(d[f.id]!==undefined)f.value=d[f.id]})}catch(e){}}
+function clearAll(){if(confirm('Clear all saved test data?')){localStorage.removeItem('healthcareRcaToolkit');fields().forEach(f=>f.value='');document.getElementById('summaryBox').innerHTML='Complete the earlier sections, then select “Refresh Summary.”';}}
+function v(id){return document.getElementById(id).value||'—'}
+function buildSummary(){document.getElementById('summaryBox').innerHTML=`<strong>${v('eventTitle')}</strong><br><br><b>Event:</b> ${v('eventDesc')}<br><br><b>Impact:</b> ${v('impact')}<br><br><b>Root cause:</b> ${v('rootCause')}<br><br><b>Corrective action:</b> ${v('corrective')}<br><br><b>Owner:</b> ${v('owner')} &nbsp; <b>Target:</b> ${v('targetDate')}<br><br><b>Effectiveness measure:</b> ${v('measure')}`;}
+loadLocal();
+</script>
+</body></html>

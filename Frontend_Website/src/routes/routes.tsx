@@ -42,6 +42,7 @@ import PaymentCancelPage from "@/pages/Payment/Cancel"
 import DashboardCourseDetail from "@/pages/Dashboard/MyCourseDetail/Index"
 import MyCoursesPage from "@/pages/Dashboard/MyCourses/Index"
 import DashboardExamPage from "@/pages/Dashboard/Exam/Index"
+import DashboardHtmlResourcePage from "@/pages/Dashboard/HtmlResource/Index"
 import OtherPage from "@/pages/OtherPages/Index"
 
 export const router = createBrowserRouter([
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
                 element: <DashboardCourseDetail />,
               },
               { path: ROUTES.DASHBOARD_EXAM, element: <DashboardExamPage /> },
+              {
+                path: ROUTES.DASHBOARD_HTML_RESOURCE,
+                element: <DashboardHtmlResourcePage />,
+              },
               // { path: ROUTES.DASHBOARD_SCHEDULES, element: <MySchedulesPage /> },
               { path: ROUTES.DASHBOARD_CE_TRACKER, element: <CeTrackerPage /> },
               {

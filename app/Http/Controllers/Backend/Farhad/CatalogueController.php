@@ -67,6 +67,10 @@ class CatalogueController extends Controller
                                     class="btn btn-sm btn-primary me-1">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>';
+                    $action .= '<a href="' . route('admin.catalogue-html-resources.index', $row->id) . '"
+                                    class="btn btn-sm btn-info me-1" title="HTML documents">
+                                    <i class="fa-solid fa-file-code"></i>
+                                </a>';
                     $action .= '<form action="' . route('admin.catalogues.destroy', $row->id) . '"
                                     method="POST" style="display:inline-block;">
                                     ' . csrf_field() . method_field('DELETE') . '

@@ -40,5 +40,6 @@ export const ROUTES = {
   PAYMENT_CANCEL: "/payment/cancel",
   DASHBOARD_COURSE_DETAIL: "/dashboard/courses/:id",
   DASHBOARD_EXAM: "/dashboard/exams/:examId",
+  DASHBOARD_HTML_RESOURCE: "/dashboard/courses/:id/documents/:resourceId",
   OTHER_PAGE: "/page/:slug",
 } as const
