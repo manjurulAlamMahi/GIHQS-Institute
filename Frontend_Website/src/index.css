@@ -1,0 +1,173 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+    --background: #F7FAF9;
+    --foreground: #16352D;
+    
+    --card: #ffffff;
+    --card-foreground: #16352D;
+    
+    --popover: #ffffff;
+    --popover-foreground: #16352D;
+    
+    --primary: #0F2F26;
+    --primary-foreground: #ffffff;
+    
+    --secondary: #EAF3F1;
+    --secondary-foreground: #0F2F26;
+
+    --yellow-primary: #F0D070;
+    --yellow-secondary: #F7F0DF;
+    
+    --muted: #EAF3F1;
+    --muted-foreground: #5F746D;
+    
+    --accent: #EAF3F1;
+    --accent-foreground: #0F2F26;
+    
+    --destructive: #eb3434;
+    --destructive-foreground: #ffffff;
+    
+    --border: rgba(15, 47, 38, 0.12);
+    --input: rgba(15, 47, 38, 0.12);
+    --ring: #CAA24A;
+    
+    --chart-1: #1E6B63;
+    --chart-2: #7A426F;
+    --chart-3: #8C4A22;
+    --chart-4: #A57C1B;
+    --chart-5: #CAA24A;
+    
+    --radius: 1rem;
+    
+    --sidebar: #F4F8F7;
+    --sidebar-foreground: #16352D;
+    --sidebar-primary: #0F2F26;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #EAF3F1;
+    --sidebar-accent-foreground: #0F2F26;
+    --sidebar-border: rgba(15, 47, 38, 0.12);
+    --sidebar-ring: #CAA24A;
+}
+
+/* .dark {
+    --background: #0F2F26;
+    --foreground: #F4F8F7;
+    
+    --card: #132E27;
+    --card-foreground: #F4F8F7;
+    
+    --popover: #132E27;
+    --popover-foreground: #F4F8F7;
+    
+    --primary: #CAA24A;
+    --primary-foreground: #0F2F26;
+    
+    --secondary: #183D33;
+    --secondary-foreground: #F4F8F7;
+    
+    --muted: #183D33;
+    --muted-foreground: #EAF3F1;
+    
+    --accent: #183D33;
+    --accent-foreground: #F4F8F7;
+    
+    --destructive: #eb3434;
+    --destructive-foreground: #ffffff;
+    
+    --border: rgba(255, 255, 255, 0.12);
+    --input: rgba(255, 255, 255, 0.12);
+    --ring: #CAA24A;
+    
+    --chart-1: #1E6B63;
+    --chart-2: #7A426F;
+    --chart-3: #8C4A22;
+    --chart-4: #A57C1B;
+    --chart-5: #CAA24A;
+    
+    --sidebar: #0F2F26;
+    --sidebar-foreground: #F4F8F7;
+    --sidebar-primary: #CAA24A;
+    --sidebar-primary-foreground: #0F2F26;
+    --sidebar-accent: #183D33;
+    --sidebar-accent-foreground: #F4F8F7;
+    --sidebar-border: rgba(255, 255, 255, 0.12);
+    --sidebar-ring: #CAA24A;
+} */
+
+@theme inline {
+    --font-sans: 'Outfit Variable', sans-serif;
+    --font-heading: 'Geist Variable', sans-serif;
+
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-yellow-secondary: var(--yellow-secondary);
+    --color-yellow-primary: var(--yellow-primary);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+    }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Custom NProgress Styling */
+#nprogress .bar {
+  background: var(--ring) !important;
+  height: 3px !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px var(--ring), 0 0 5px var(--ring) !important;
+}

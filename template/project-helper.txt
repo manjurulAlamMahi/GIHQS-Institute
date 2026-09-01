@@ -1,0 +1,24 @@
+packages installed:
+
+1. laravel breeze
+composer require laravel/breeze --dev
+php artisan breeze:install
+Select blade (or others)
+
+2. PHP-Open-Source-Saver/jwt-auth
+https://github.com/PHP-Open-Source-Saver/jwt-auth
+
+3. image intervention
+composer require intervention/image:^2.7
+
+4. yajra/laravel-datatables-oracle
+https://github.com/yajra/laravel-datatables
+
+5. config/cors.php file
+6. MiaHelper.php file
+7. ApiResponse.php trait file for api
+
+8. stripe package
+composer require stripe/stripe-php
+and update .env file and add into config/services.php
+

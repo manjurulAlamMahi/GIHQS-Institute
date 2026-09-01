@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lean Healthcare Learning Path (10 Lessons)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest-900: #14301f;
+    --forest-800: #1b3d28;
+    --gold-400: #e6c26b;
+    --gold-600: #c9a03f;
+    --cream-100: #f2f1ec;
+    --row-bg: #f6f5f0;
+    --ink-900: #1f2a22;
+    --ink-600: #66746a;
+    --ink-400: #96a196;
+    --line: #e6e3d9;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--cream-100);
+    font-family: 'Inter', sans-serif;
+    color: var(--ink-900);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page{
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  .card{
+    background:#fff;
+    border-radius: 22px;
+    padding: 44px 44px 40px;
+    box-shadow: 0 30px 70px -40px rgba(31,42,34,0.35);
+    border: 1px solid var(--line);
+  }
+
+  .eyebrow{
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-600);
+    margin-bottom: 14px;
+  }
+
+  h1{
+    font-family:'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 27px;
+    color: var(--forest-900);
+    margin: 0 0 16px;
+    letter-spacing: 0.1px;
+  }
+
+  .intro{
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-600);
+    max-width: 640px;
+    margin: 0 0 24px;
+  }
+  .intro strong{ color: var(--ink-900); font-weight: 700; }
+
+  .pill-row{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 34px;
+  }
+
+  .pill{
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--forest-900);
+    background: #eef1ea;
+    border: 1px solid #dfe4d8;
+    padding: 7px 14px;
+    border-radius: 999px;
+  }
+
+  /* ---------- LESSON LIST ---------- */
+
+  .lessons{
+    position: relative;
+  }
+
+  .lesson{
+    position: relative;
+    display:flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 16px 20px 16px 0;
+  }
+
+  .lesson + .lesson{
+    margin-top: 10px;
+  }
+
+  .rail{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 32px;
+    flex-shrink: 0;
+  }
+
+  .num{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--gold-400), var(--gold-600));
+    color: #2b2109;
+    font-size: 13px;
+    font-weight: 700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index: 2;
+    box-shadow: 0 2px 6px rgba(201,160,63,0.35);
+  }
+
+  .connector{
+    position:absolute;
+    top: 32px;
+    width: 2px;
+    height: calc(100% + 10px);
+    background: var(--line);
+    z-index: 1;
+  }
+
+  .lesson:last-child .connector{ display:none; }
+
+  .lesson-body{
+    flex:1;
+    background: var(--row-bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 18px;
+  }
+
+  .lesson-body h3{
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--forest-900);
+    margin: 0 0 5px;
+  }
+
+  .lesson-body p{
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-600);
+    margin: 0;
+  }
+
+  @media (max-width: 600px){
+    .card{ padding: 32px 22px 30px; }
+    h1{ font-size: 22px; }
+    .lesson-body{ padding: 12px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="card">
+
+    <div class="eyebrow">Course Lessons</div>
+    <h1>Lean Healthcare Learning Path (10 Lessons)</h1>
+    <p class="intro">This professional learning module is organized into <strong>10 short lessons</strong>. Learners can progress lesson by lesson and then complete the final Lean Healthcare assessment.</p>
+
+    <div class="pill-row">
+      <span class="pill">Lesson 1–3 • Foundations</span>
+      <span class="pill">Lesson 4–7 • Lean Tools</span>
+      <span class="pill">Lesson 8–10 • Leadership &amp; Sustainment</span>
+    </div>
+
+    <div class="lessons">
+
+      <div class="lesson">
+        <div class="rail"><div class="num">1</div><div class="connector"></div></div>
+        <div class="lesson-body">
+          <h3>Lean Healthcare Foundations</h3>
+          <p>Introduction to Lean thinking, patient value, and the role of waste reduction in healthcare.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="rail"><div class="num">2</div><div class="connector"></div></div>
+        <div class="lesson-body">
+          <h3>Value Stream Mapping in Healthcare</h3>
+          <p>See the patient journey more clearly and identify delays, duplication, and non-value-added steps.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="rail"><div class="num">3</div><div class="connector"></div></div>
+        <div class="lesson-body">
+          <h3>5S in Healthcare</h3>
+          <p>Learn how organization, visibility, and workspace discipline support safety and workflow reliability.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="rail"><div class="num">4</div><div class="connector"></div></div>
+        <div class="lesson-body">
+          <h3>Continuous Improvement &amp; Kaizen</h3>
+          <p>Understand how small daily improvements build stronger systems and better care processes over time.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="rail"><div class="num">5</div><div class="connector"></div></div>
+        <div class="lesson-body">
+          <h3>Lean Problem Solving in Healthcare</h3>
+          <p>Learn how Lean teams move beyond symptoms to identify root causes and improve process performance.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="rail"><div class="num">6</div><div class="connector"></div></div>
+        <div class="lesson-body">
+          <h3>Standard Work in Healthcare</h3>
+          <p>Understand how standardization reduces harmful variation and supports safer, more reliable care.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="rail"><div class="num">7</div><div class="connector"></div></div>
+        <div class="lesson-body">
+          <h3>Visual Management in Healthcare</h3>
+          <p>Use visible cues, labels, and status systems to improve communication, awareness, and response.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="rail"><div class="num">8</div><div class="connector"></div></div>
+        <div class="lesson-body">
+          <h3>Patient Flow in Lean Healthcare</h3>
+          <p>Examine bottlenecks, delays, and throughput challenges across the patient care journey.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="rail"><div class="num">9</div><div class="connector"></div></div>
+        <div class="lesson-body">
+          <h3>Lean Leadership in Healthcare</h3>
+          <p>Explore how leaders create daily improvement culture, remove barriers, and support frontline teams.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="rail"><div class="num">10</div></div>
+        <div class="lesson-body">
+          <h3>Sustaining Lean in Healthcare</h3>
+          <p>Learn how to maintain gains through standard work, visibility, leadership support, and daily habits.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

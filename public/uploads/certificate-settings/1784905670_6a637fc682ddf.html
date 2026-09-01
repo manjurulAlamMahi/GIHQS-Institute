@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GIHQS Certificate - {{CERTIFICATION_CODE}}</title>
+<style>
+    /* DomPDF supports @page rule for page size and background.
+       Everything else is inline below for maximum DomPDF compatibility. */
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        width: 297mm;
+        height: 210mm;
+        font-family: DejaVu Serif, Times, serif;
+        background-image: url('assets/certificate_frame.png');
+        background-size: 297mm 210mm;
+        background-repeat: no-repeat;
+        background-position: top left;
+        overflow: hidden;
+    }
+    /*
+    ============================================================================
+    FONT NOTES FOR THE DEVELOPER
+    ============================================================================
+    DomPDF ships with DejaVu fonts (Serif, Sans, Mono) out of the box.
+    The template uses these as defaults so it renders correctly without any
+    font installation.
+
+    To use the GIHQS brand fonts (Cormorant Garamond + DM Sans):
+
+    1. Download .ttf files from Google Fonts:
+       - Cormorant Garamond: Regular, Italic, Bold, Bold Italic
+       - DM Sans: Regular, Medium, Bold
+
+    2. Place them in your DomPDF font directory (usually storage/fonts/
+       in Laravel, or vendor/dompdf/dompdf/lib/fonts/).
+
+    3. Register each font using DomPDF's font loader:
+       php vendor/dompdf/dompdf/load_font.php cormorantgaramond \
+           /path/to/CormorantGaramond-Regular.ttf \
+           /path/to/CormorantGaramond-Italic.ttf \
+           /path/to/CormorantGaramond-Bold.ttf \
+           /path/to/CormorantGaramond-BoldItalic.ttf
+
+       php vendor/dompdf/dompdf/load_font.php dmsans \
+           /path/to/DMSans-Regular.ttf \
+           /path/to/DMSans-Medium.ttf \
+           /path/to/DMSans-Bold.ttf
+
+    4. Then do a find-and-replace in this file:
+       "DejaVu Serif, Times, serif"  ->  "cormorantgaramond, serif"
+       "DejaVu Sans, Arial, sans-serif"  ->  "dmsans, sans-serif"
+
+    Until then, the DejaVu defaults render cleanly and look professional.
+    ============================================================================
+    */
+</style>
+</head>
+<body>
+
+<!-- Top spacer: keeps content clear of the top-left swoosh -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr><td height="8" style="height: 8px; font-size: 1px; line-height: 1px;">&nbsp;</td></tr>
+</table>
+
+<!-- LOGO: enlarged from 14mm to 180px wide as requested -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center;">
+        <img src="assets/gihqs-logo-transparent.png" width="110" height="42" style="width: 110px; height: auto;" alt="GIHQS">
+    </td>
+</tr>
+</table>
+
+<!-- Issuing authority line -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 1px 80px 0;">
+        <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 8pt; letter-spacing: 4px; color: #0F2F26; text-transform: uppercase;">Global Institute for Healthcare Quality &amp; Safety</span>
+    </td>
+</tr>
+</table>
+
+<!-- Gold rule with diamond accents -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="middle" style="text-align: center; padding: 1px 0 0;">
+        <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto; border-collapse: collapse;">
+        <tr>
+            <td width="8" height="8" style="width: 8px; height: 8px; background-color: #CAA24A; font-size: 1px; line-height: 1px;">&nbsp;</td>
+            <td width="8" style="width: 8px; font-size: 1px; line-height: 1px;">&nbsp;</td>
+            <td width="180" height="1" style="width: 180px; height: 1px; background-color: #CAA24A; font-size: 1px; line-height: 1px;">&nbsp;</td>
+            <td width="8" style="width: 8px; font-size: 1px; line-height: 1px;">&nbsp;</td>
+            <td width="8" height="8" style="width: 8px; height: 8px; background-color: #CAA24A; font-size: 1px; line-height: 1px;">&nbsp;</td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- Certificate title -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 1px 80px 0;">
+        <span style="font-family: DejaVu Serif, Times, serif; font-size: 24pt; color: #0F2F26; letter-spacing: 2px;">Certificate of Professional Certification</span>
+    </td>
+</tr>
+</table>
+
+<!-- Subtitle -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 1px 80px 0;">
+        <span style="font-family: DejaVu Serif, Times, serif; font-style: italic; font-size: 11pt; color: #CAA24A;">Issued under the authority of the GIHQS Certification Board</span>
+    </td>
+</tr>
+</table>
+
+<!-- "This is to certify that" -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 2px 80px 0;">
+        <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 9pt; letter-spacing: 3px; color: #0F2F26; text-transform: uppercase;">This is to certify that</span>
+    </td>
+</tr>
+</table>
+
+<!-- Recipient name -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 1px 80px 0;">
+        <span style="font-family: DejaVu Serif, Times, serif; font-size: 26pt; font-weight: bold; color: #0F2F26;">{{RECIPIENT_NAME}}</span>
+    </td>
+</tr>
+</table>
+
+<!-- Gold underline rule under name -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 1px 0 0;">
+        <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto; border-collapse: collapse;">
+        <tr>
+            <td width="500" height="1" style="width: 500px; height: 1px; background-color: #CAA24A; font-size: 1px; line-height: 1px;">&nbsp;</td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- Body text -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 1px 120px 0;">
+        <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 9.5pt; color: #0F2F26; line-height: 1.4;">has successfully fulfilled the prescribed requirements of examination, assessment, and ethical standards, and is hereby awarded the professional designation of</span>
+    </td>
+</tr>
+</table>
+
+<!-- Credential full name -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 1px 80px 0;">
+        <span style="font-family: DejaVu Serif, Times, serif; font-style: italic; font-size: 16pt; font-weight: bold; color: #0F2F26;">{{CREDENTIAL_FULL_NAME}}</span>
+    </td>
+</tr>
+</table>
+
+<!-- Credential code badge -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 1px 0 0;">
+        <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto; border-collapse: collapse;">
+        <tr>
+            <td style="padding: 4px 18px; background-color: #FBF5E6; border: 1px solid #CAA24A;">
+                <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 9pt; font-weight: bold; letter-spacing: 3px; color: #8A6D28;">{{CERTIFICATION_CODE}}</span>
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- Credential statement -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td align="center" valign="top" style="text-align: center; padding: 1px 140px 0;">
+        <span style="font-family: DejaVu Sans, Arial, sans-serif; font-style: italic; font-size: 8pt; color: #0F2F26; line-height: 1.4;">{{CREDENTIAL_STATEMENT}}</span>
+    </td>
+</tr>
+</table>
+
+<!-- Footer spacer -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr><td height="1" style="height: 1px; font-size: 1px; line-height: 1px;">&nbsp;</td></tr>
+</table>
+
+<!-- FOOTER: signatures + seal -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td style="padding: 0 110px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <!-- Left signature -->
+            <td width="34%" align="center" valign="bottom" style="width: 34%; text-align: center;">
+                <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto; border-collapse: collapse;">
+                <tr><td align="center" style="text-align: center; height: 35px; vertical-align: bottom;">
+                    {{CHAIRMAN_SIGNATURE_HTML}}
+                </td></tr>
+                <tr><td width="180" height="1" style="width: 180px; height: 1px; background-color: #0F2F26; font-size: 1px; line-height: 1px;">&nbsp;</td></tr>
+                <tr><td align="center" style="padding-top: 4px; text-align: center;">
+                    <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 8.5pt; font-weight: bold; letter-spacing: 1px; color: #0F2F26; text-transform: uppercase;">Chairman of the Board</span>
+                </td></tr>
+                <tr><td align="center" style="padding-top: 2px; text-align: center;">
+                    <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 7pt; color: #0F2F26;">GIHQS Certification Authority</span>
+                </td></tr>
+                </table>
+            </td>
+            <!-- Seal -->
+            <td width="32%" align="center" valign="bottom" style="width: 32%; text-align: center;">
+                <img src="{{SEAL_PATH}}" width="80" height="80" style="width: 80px; height: 80px;" alt="{{CERTIFICATION_CODE}} Seal">
+            </td>
+            <!-- Right signature -->
+            <td width="34%" align="center" valign="bottom" style="width: 34%; text-align: center;">
+                <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto; border-collapse: collapse;">
+                <tr><td align="center" style="text-align: center; height: 35px; vertical-align: bottom;">
+                    {{EXECUTIVE_DIRECTOR_SIGNATURE_HTML}}
+                </td></tr>
+                <tr><td width="180" height="1" style="width: 180px; height: 1px; background-color: #0F2F26; font-size: 1px; line-height: 1px;">&nbsp;</td></tr>
+                <tr><td align="center" style="padding-top: 4px; text-align: center;">
+                    <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 8.5pt; font-weight: bold; letter-spacing: 1px; color: #0F2F26; text-transform: uppercase;">Executive Director</span>
+                </td></tr>
+                <tr><td align="center" style="padding-top: 2px; text-align: center;">
+                    <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 7pt; color: #0F2F26;">GIHQS Professional Standards</span>
+                </td></tr>
+                </table>
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+<!-- Meta bar spacer -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr><td height="1" style="height: 1px; font-size: 1px; line-height: 1px;">&nbsp;</td></tr>
+</table>
+
+<!-- META BAR (4 columns with top gold rule) -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+<tr>
+    <td style="padding: 0 160px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse; border-top: 1px solid #CAA24A;">
+        <tr>
+            <td width="30%" align="left" valign="top" style="width: 30%; padding: 6px 0 0; text-align: left;">
+                <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 6pt; letter-spacing: 1.5px; color: #0F2F26; text-transform: uppercase;">Certificate ID</span><br>
+                <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 8pt; font-weight: bold; color: #0F2F26;">{{CERTIFICATE_ID}}</span>
+            </td>
+            <td width="30%" align="center" valign="top" style="width: 30%; padding: 6px 0 0; text-align: center;">
+                <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 6pt; letter-spacing: 1.5px; color: #0F2F26; text-transform: uppercase;">Date of Issue</span><br>
+                <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 8pt; font-weight: bold; color: #0F2F26;">{{ISSUE_DATE}}</span>
+            </td>
+            <td width="30%" align="right" valign="top" style="width: 30%; padding: 6px 0 0; text-align: right;">
+                <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 6pt; letter-spacing: 1.5px; color: #0F2F26; text-transform: uppercase;">Valid Until</span><br>
+                <span style="font-family: DejaVu Sans, Arial, sans-serif; font-size: 8pt; font-weight: bold; color: #0F2F26;">{{EXPIRY_DATE}}</span>
+            </td>
+            <td width="10%" align="right" valign="top" style="width: 10%; padding: 6px 0 0; text-align: right;">
+            </td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+
+</body>
+</html>
