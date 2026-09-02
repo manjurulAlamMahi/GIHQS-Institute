@@ -29,8 +29,12 @@ class CertificateSettingController extends Controller
         $request->validate([
             'certificate_template'          => 'nullable|file|mimes:html,txt|max:2048',
             'chairman_name'                  => 'nullable|string|max:255',
+            'chairman_title'                 => 'nullable|string|max:255',
             'chairman_signature'             => 'nullable|image|mimes:png,jpg,jpeg,svg,webp|max:2048',
             'executive_director_name'        => 'nullable|string|max:255',
+            'executive_director_title'       => 'nullable|string|max:255',
+            'show_chairman'                  => 'nullable|boolean',
+            'show_executive_director'        => 'nullable|boolean',
             'executive_director_signature'   => 'nullable|image|mimes:png,jpg,jpeg,svg,webp|max:2048',
         ]);
 
@@ -81,7 +85,15 @@ class CertificateSettingController extends Controller
         }
 
         $setting->chairman_name = $request->chairman_name;
+        // A blank title falls back to the model default at render time.
+        $setting->chairman_title = $request->chairman_title;
         $setting->executive_director_name = $request->executive_director_name;
+        $setting->executive_director_title = $request->executive_director_title;
+
+        // Each form posts a hidden "0" before its checkbox, so an unticked box
+        // reliably means off rather than absent.
+        $setting->show_chairman = $request->boolean('show_chairman');
+        $setting->show_executive_director = $request->boolean('show_executive_director');
 
         $setting->save();
 
